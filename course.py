@@ -1,8 +1,12 @@
 import openai
 from PyPDF2 import PdfReader
+from dotenv import load_dotenv
+import os
 
 
-openai.api_key = "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"
+load_dotenv()
+openai.api_key = os.getenv("CHATGPT_API_KEY")
+
 model_engine = "text-davinci-003"
 
 def convert_pdf_to_txt(file_path):
