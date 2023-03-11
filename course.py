@@ -1,18 +1,24 @@
 import openai
 from PyPDF2 import PdfReader
+from dotenv import load_dotenv
+import os
+import constants
 
+load_dotenv()
 
-openai.api_key = "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"
+openai.api_key = os.getenv('API_KEY')
+
 model_engine = "text-davinci-003"
 
-def convert_pdf_to_txt(file_path):
-    resume = ""
-    with open(file_path, 'rb') as file:
-        pdf_reader = PdfReader(file)
-        pages = pdf_reader.pages
-        for page in pages:
-            resume += page.extract_text()
-    return resume
+# TODO: extract to main file
+# def convert_pdf_to_txt(file_path):
+#     resume = ""
+#     with open(file_path, 'rb') as file:
+#         pdf_reader = PdfReader(file)
+#         pages = pdf_reader.pages
+#         for page in pages:
+#             resume += page.extract_text()
+#     return resume
 
 job_description='''About the job
 Building the life you want starts with acquiring skills that are in demand.
@@ -79,8 +85,9 @@ The starting hourly rate for first-year apprentices is usually between $17-$22/h
 
 If this sounds like you, and you want to start your career in construction, we encourage you to apply today!'''
 
-resume = convert_pdf_to_txt("Resume.pdf")
-prompt = f"This is my resume: {resume}, and this is the description of a job I'm interested in:{job_description}. What are some courses and their URLs, in format of course name&&&course url, separated by***, that I could take to be better suited for the job?"
+#resume = convert_pdf_to_txt("Resume.pdf")
+
+prompt = f"This is my resume: {constants.RESUME}, and this is the description of a job I'm interested in:{job_description}. What are some courses and their URLs, in format of course name&&&course url, separated by***, that I could take to be better suited for the job?"
 def request():
     completion = openai.Completion.create (
         engine=model_engine,
