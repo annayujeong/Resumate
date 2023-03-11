@@ -8,6 +8,9 @@ load_dotenv()
 
 openai.api_key = os.getenv('API_KEY')
 
+load_dotenv()
+openai.api_key = os.getenv("CHATGPT_API_KEY")
+
 model_engine = "text-davinci-003"
 
 # TODO: extract to main file
