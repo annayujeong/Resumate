@@ -2,11 +2,13 @@ from flask import Flask
 from course import response
 from flask_cors import CORS
 
+from resumeRewriter import rewriteResume
+from resumeRewriter import highlightDifferences
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/")
+@app.route("/courses")
 def hello():
     return response()
 
@@ -18,3 +20,12 @@ def hello_from_home():
 def temp_func(temp):
     print(temp)
     return temp
+
+@app.route("/resumeResults")
+def resume():
+    #rewriteResume()
+    return highlightDifferences()
+
+@app.route("/")
+def temp():
+    return ("This is the main page!")
