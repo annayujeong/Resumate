@@ -4,7 +4,7 @@ from course import response
 from flask_cors import CORS
 
 from resumeRewriter import rewriteResume
-from resumeRewriter import highlightDifferences
+# from resumeRewriter import highlightDifferences
 
 app = Flask(__name__)
 CORS(app)
