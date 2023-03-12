@@ -4,7 +4,7 @@ from course import response
 from flask_cors import CORS
 
 from resumeRewriter import rewriteResume
-# from resumeRewriter import highlightDifferences
+from resumeRewriter import highlightDifferences
 
 app = Flask(__name__)
 CORS(app)
@@ -13,21 +13,16 @@ CORS(app)
 def job_resume():
     return request.data
 
-@app.route("/courses/", methods=['POST'])
+@app.route("/courses", methods=['POST'])
 def courses():
-    return response(request.data)
-
-def hello():
-    return response()
+    data = {}
+    data['resume'] = request.form['resume']
+    data['job_description'] = request.form['job_description']
+    return response(data)
 
 @app.route("/homepage")
 def hello_from_home():
     return "Hello from the homepage"
-
-@app.route("/temp", methods=['POST'])
-def temp_func():
-    # print(temp)
-    return request.data
 
 @app.route("/stuff", methods=['POST'])
 def stuff():
@@ -47,7 +42,3 @@ def postResume():
     return rewriteResume(data)
     # return data
     # return request.form['resume']
-
-@app.route("/")
-def temp():
-    return ("This is the main page!")
