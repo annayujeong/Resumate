@@ -24,11 +24,17 @@ openai.api_key = os.getenv('API_KEY')
 
 # rewrittenResume = None
 
-def rewriteResume():
+
+
+def rewriteResume(data):
+
+  resume_prompt = f'''This is my resume: {data}. Can you rewrite it to make it more professional and better
+  highlight my skills and experience?'''
 
   response = openai.Completion.create(
   model="text-davinci-003",
-  prompt= constants.RESUME_PROMPT,
+  # prompt= constants.RESUME_PROMPT,
+  prompt = resume_prompt,
   temperature=0.9,
   max_tokens=2048,
   top_p=1,
@@ -46,30 +52,30 @@ def rewriteResume():
   # print(rewrittenResume)
   return response["choices"][0]["text"]
 
-def highlightDifferences():
+# def highlightDifferences():
 
-  new_line = "\n"
+#   new_line = "\n"
 
-  rewrittenResume = rewriteResume()
+#   rewrittenResume = rewriteResume()
 
-  print("?????????????????????????????????????????????????")
-  print(constants.RESUME)
+#   print("?????????????????????????????????????????????????")
+#   print(constants.RESUME)
 
-  print("?????????????????????????????????????????????????")
-  print(rewrittenResume)
+#   print("?????????????????????????????????????????????????")
+#   print(rewrittenResume)
 
-  response = openai.Completion.create(
-  model="text-davinci-003",
-  prompt= f'''List the different words that were changed between these two strings: {new_line}"{constants.RESUME}" {new_line}"{rewrittenResume}"''',
-  temperature=0.9,
-  max_tokens=2048,
-  top_p=1,
-  frequency_penalty=0.0,
-  presence_penalty=0.6,
-  stop=[" Human:", " AI:"]
-  )
+#   response = openai.Completion.create(
+#   model="text-davinci-003",
+#   prompt= f'''List the different words that were changed between these two strings: {new_line}"{constants.RESUME}" {new_line}"{rewrittenResume}"''',
+#   temperature=0.9,
+#   max_tokens=2048,
+#   top_p=1,
+#   frequency_penalty=0.0,
+#   presence_penalty=0.6,
+#   stop=[" Human:", " AI:"]
+#   )
 
-  print("*********************************************************")
-  print(response)
-  return response
+#   print("*********************************************************")
+#   print(response)
+#   return response
 
