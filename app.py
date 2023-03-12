@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from course import response
 from flask_cors import CORS
 
@@ -16,10 +16,10 @@ def hello():
 def hello_from_home():
     return "Hello from the homepage"
 
-@app.route("/temp", methods=['GET'])
-def temp_func(temp):
-    print(temp)
-    return temp
+@app.route("/temp", methods=['POST'])
+def temp_func():
+    # print(temp)
+    return request.data
 
 @app.route("/resumeResults")
 def resume():
