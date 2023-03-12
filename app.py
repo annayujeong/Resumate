@@ -1,3 +1,4 @@
+import ast
 from flask import Flask, request
 from course import response
 from flask_cors import CORS
@@ -8,7 +9,14 @@ from resumeRewriter import highlightDifferences
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/courses")
+@app.route("/job_resume/", methods=['POST'])
+def job_resume():
+    return request.data
+
+@app.route("/courses/", methods=['POST'])
+def job_resume():
+    return response(request.data)
+
 def hello():
     return response()
 
